@@ -1,10 +1,10 @@
-version: "2"
+version: "3"
 
 services:
   productmicroservice:
     image: hanln/product-service
     build:
-      context: ../../product-service/
+      context: ../product-service/
       dockerfile: Dockerfile
     ports:
       - "3002:3002"
@@ -12,7 +12,7 @@ services:
       - productandlog
       - product
     restart: unless-stopped
-    env_file: ../../product-service/.env
+    env_file: ../product-service/.env
   mongo-product:
     image: mongo:4.2.5
     command: mongod --port 27018
@@ -24,14 +24,14 @@ services:
     ports:
       - "27018:27018"
     volumes:
-      - ../../product-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+      - ../product-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
       - productvol:/data/db
     networks:
       - product
   logmicroservice:
     image: hanln/log-service
     build:
-      context: ../../log-service/
+      context: ../log-service/
       dockerfile: Dockerfile
     ports:
       - "3001:3001"
@@ -39,7 +39,7 @@ services:
       - productandlog
       - log
     restart: unless-stopped
-    env_file: ../../log-service/.env
+    env_file: ../log-service/.env
   mongo-log:
     image: mongo:4.2.5
     restart: unless-stopped
@@ -50,7 +50,7 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ../../log-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+      - ../log-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
       - logvol:/data/db
     networks:
       - log
