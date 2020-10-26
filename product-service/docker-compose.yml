@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  productmicroservice:
+    # This defines the configuration options, including the context and dockerfile,
+    # that will be applied when Compose builds the application image.
+    build:
+      # This defines the build context for the image build — in this case, the current project directory.
+      context: .
+      # This specifies the Dockerfile in your current project directory as the file
+      dockerfile: Dockerfile
+    image: hanln/product-service
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - '$PORT:$PORT'
+    networks:
+      - product
+
+    mongo-product:
+    # To create this service, Compose will pull the mongo
+    image: mongo:4.2.5
+    command: mongod --port 27018
+    restart: unless-stopped
+    # This tells Compose that we would like to add environment variables
+    # from a file called .env, located in our build context.
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$DB_ADMIN
+      - MONGO_INITDB_ROOT_PASSWORD=$DB_ADMIN_PWD
+      - MONGO_INITDB_DATABASE=$DB_NAME
+    ports:
+      - '$DB_PORT:27018'
+    volumes:
+      - ./pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+        # The named volume dbdata will persist the data stored in Mongo’s default data directory, /data/db.
+        # This will ensure that you don’t lose data in cases where you stop or remove containers.
+      - productvol:/data/db
+    networks:
+      - product
+
+volumes:
+  productvol:
+
+networks:
+  product:

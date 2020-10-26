@@ -1,0 +1,65 @@
+version: "2"
+
+services:
+  productmicroservice:
+    image: hanln/product-service
+    build:
+      context: ../../product-service/
+      dockerfile: Dockerfile
+    ports:
+      - "3002:3002"
+    networks:
+      - productandlog
+      - product
+    restart: unless-stopped
+    env_file: ../../product-service/.env
+  mongo-product:
+    image: mongo:4.2.5
+    command: mongod --port 27018
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=product_db
+    ports:
+      - "27018:27018"
+    volumes:
+      - ../../product-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+      - productvol:/data/db
+    networks:
+      - product
+  logmicroservice:
+    image: hanln/log-service
+    build:
+      context: ../../log-service/
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    networks:
+      - productandlog
+      - log
+    restart: unless-stopped
+    env_file: ../../log-service/.env
+  mongo-log:
+    image: mongo:4.2.5
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=log_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ../../log-service/pre-setting/mongo.js:/docker-entrypoint-initdb.d/mongo.js:ro
+      - logvol:/data/db
+    networks:
+      - log
+
+volumes:
+  productvol:
+  logvol:
+
+networks:
+  productandlog:
+  product:
+  log:
