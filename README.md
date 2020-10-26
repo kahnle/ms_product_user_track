@@ -30,7 +30,7 @@ Following are the features of this project:
   - Go to **product-service** directory and make a copy of **.env.example** file to **.env**.
   - Go to **product-service** directory make a copy of **tests/.env.test.example** file to **tests/.env.test**.
   - Install Docker and Docker Compose. [Find Instructions Here](https://docs.docker.com/install/).
-  - Got to **start** directory Execute `docker-compose up -d` in terminal from the repo directory.
+  - Got to **start** directory Execute `docker-compose up -d` in terminal from the repo directory and wait a moment for every ready to use.
   - You will be able to access the api from http://localhost:3002
 - Run The Tests
   - Install node.js and npm on your local machine.
