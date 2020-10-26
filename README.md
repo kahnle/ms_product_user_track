@@ -17,6 +17,11 @@ Following are the features of this project:
 
 - **Microservices**: Project include project service and log service, they integrated through docker container. Next time we will implement an API gateway that is the single entry point for all clients.
 
+<p align="center">
+    <img src="https://github.com/kahnle/ms_product_user_track/blob/main/product-service/pre-setting/schema.png">
+</p>
+<br>
+
 ## How to build and run this project
 
 - Install this project using Docker Compose [**Recommended Method**]
