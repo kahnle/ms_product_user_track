@@ -163,4 +163,7 @@ Following are the features of this project:
 
   ## USER ACTIVETIES
 
-  - The user activities log saved at database of log service.
+  - The user activities log saved at log collection of database in log service.
+  <p align="center">
+    <img src="https://github.com/kahnle/ms_product_user_track/blob/main/log-service/pre-setting/log_entity.png">
+   </p>
