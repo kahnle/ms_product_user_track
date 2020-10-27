@@ -26,6 +26,7 @@ export default class ProductController {
         const listDataSort = sort.split(',');
         listDataSort.forEach((data) => {
           if (data.indexOf('-') >= 0) sortObj[data.substr(1)] = -1;
+          else sortObj[data.substr(1)] = 1;
         });
       }
       const products = await ProductRepo.find(limit, page, filter, query, sortObj);

@@ -15,8 +15,6 @@ export const LogMiddleware = (service: any) => {
       query: req.query ? JSON.stringify(req.query) : '',
       res_status: body.status ? body.status : '',
     };
-    console.log(data);
-    console.log(process.env);
     service.sendLog(data).catch((error: any) => {
       console.log(error);
     });

@@ -20,6 +20,7 @@ export default class ProductRepo {
 
     let productList: Product[] = [];
     let productCount: Product[] = [];
+    console.log(sort);
     if (query) {
       productList = await ProductModel.find({
         $and: [{ $text: { $search: query } }, { ...filter }],
