@@ -89,6 +89,55 @@ Following are the features of this project:
     }
   }
   ```
+- Get Products with query is full text search in name and description
+  curl http://localhost:3002/v1/products?query=simple&page=1&limit=3
+  ```
+    {
+      "statusCode": "10000",
+      "status": 200,
+      "message": "success",
+      "data": {
+          "products": [
+              {
+                  "_id": "5f971d95db372b83d875bd20",
+                  "name": "Test Configurable-simple product-S-Purple",
+                  "description": "<p>This is a test simple product that belongs to the test configurable product named Test Configurable Product with SKU: TST-Conf.</p>\n<p>That has been imported using Firebear Studio Imporved Import and Export extension: https://firebearstudio.com/the-improved-import.html</p>",
+                  "sku": "TST-Conf-Simp-S-Green",
+                  "categories": "Default Category/Women/Tops/Hoodies & Sweatshirts,Default Category/Collections/Performance Fabrics,Default Category",
+                  "image": "https://firebearstudio.com/media/logos/default/logo.png",
+                  "price": 68,
+                  "qty": 100,
+                  "status": "disable"
+              },
+              {
+                  "_id": "5f971d95db372b83d875bd1f",
+                  "name": "Test Configurable-simple product-S-Green",
+                  "description": "<p>This is a test simple product that belongs to the test configurable product named Test Configurable Product with SKU: TST-Conf.</p>\n<p>That has been imported using Firebear Studio Imporved Import and Export extension: https://firebearstudio.com/the-improved-import.html</p>",
+                  "sku": "TST-Conf-Simp-S-Green",
+                  "categories": "Default Category/Collections/Performance Fabrics,Default Category",
+                  "image": "https://firebearstudio.com/media/logos/default/logo.png",
+                  "price": 68,
+                  "qty": 100,
+                  "status": "disable"
+              },
+              {
+                  "_id": "5f971d95db372b83d875bd1e",
+                  "name": "Test Configurable-simple product-S-Gray",
+                  "description": "<p>This is a test simple product that belongs to the test configurable product named Test Configurable Product with SKU: TST-Conf.</p>\n<p>That has been imported using Firebear Studio Imporved Import and Export extension: https://firebearstudio.com/the-improved-import.html</p>",
+                  "sku": "TST-Conf-Simp-S-Gray",
+                  "categories": "Default Category",
+                  "image": "https://firebearstudio.com/media/logos/default/logo.png",
+                  "price": 20,
+                  "qty": 10,
+                  "status": "publish"
+              }
+          ],
+          "total": 15,
+          "page": 1
+      }
+    }
+  ```
+
 
 - Get Product Detail By ID
   curl curl http://localhost:3002/v1/products/5f96de5c013d93eab603a3fd
